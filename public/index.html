@@ -28,33 +28,60 @@
   </header>
 
   <main id="top">
-    <!-- HERO -->
+    <!-- HERO (Fixed Boat Position) -->
     <section class="hero">
       <svg class="scene" viewBox="0 0 800 420" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
         <defs>
           <linearGradient id="sunG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#f4511e"/>
-            <stop offset=".55" stop-color="#fb8c1f"/>
-            <stop offset="1" stop-color="#ffb81f"/>
+            <stop offset="0%" stop-color="#f4511e"/>
+            <stop offset="50%" stop-color="#fb8c1f"/>
+            <stop offset="100%" stop-color="#ffb81f"/>
           </linearGradient>
-          <clipPath id="sunClip"><circle cx="400" cy="270" r="150"/></clipPath>
+          <linearGradient id="wave1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#0a74b8" />
+            <stop offset="100%" stop-color="#0b5f99" />
+          </linearGradient>
+          <linearGradient id="wave2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#118cdb" />
+            <stop offset="100%" stop-color="#0a74b8" />
+          </linearGradient>
+          <linearGradient id="wave3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#169ef5" />
+            <stop offset="100%" stop-color="#118cdb" />
+          </linearGradient>
         </defs>
-        <g class="sun"><circle cx="400" cy="270" r="150" fill="url(#sunG)"/></g>
-        <g clip-path="url(#sunClip)" class="boat">
-          <path d="M455 262 L505 262 L505 188 Q470 215 455 262Z" fill="none" stroke="#0e2a47" stroke-width="3"/>
-          <path d="M440 276 Q480 262 530 270 L520 282 L452 284Z" fill="#0e2a47"/>
+
+        <g class="sun">
+          <circle cx="400" cy="240" r="140" fill="url(#sunG)"/>
         </g>
+
+        <g fill="none" stroke="#0e2a47" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6">
+          <path d="M 500 150 Q 510 140 520 150 Q 530 140 540 150" />
+          <path d="M 550 120 Q 560 110 570 120 Q 580 110 590 120" />
+        </g>
+
+        <!-- Sail Boat (Moved Down to Float on Water) -->
+        <g class="boat">
+          <!-- Sail -->
+          <path d="M 470 220 L 530 290 L 470 290 Z" fill="#0e2a47" />
+          <path d="M 470 220 L 485 290 L 470 290 Z" fill="#ffffff" opacity="0.9" />
+          <!-- Hull -->
+          <path d="M 430 295 Q 480 315 540 295 L 520 320 L 440 320 Z" fill="#0e2a47" />
+        </g>
+
         <g class="palms" fill="#0e2a47">
-          <path d="M236 300 Q250 220 270 150 L278 152 Q262 230 252 300Z"/>
-          <path d="M272 148 q-40-30-70-8 q35-10 68 12 q-20-45-8-72 q18 40 14 70 q30-35 62-30 q-35 5-60 32 q40-6 60 22 q-40-22-66-8Z"/>
-          <path d="M296 300 Q300 250 330 215 L335 219 Q312 252 308 300Z"/>
-          <path d="M330 214 q-26-18-50-4 q26-4 48 10 q-12-30-2-46 q12 26 6 44 q22-18 42-10 q-24 6-40 22 q26-2 40 12 q-26-12-44-4Z"/>
-          <path d="M150 316 Q260 286 400 308 L400 330 L150 330Z" opacity=".95"/>
+          <path d="M 50 360 Q 200 330 300 360 Z" />
+          <path d="M 190 350 Q 200 250 230 150 L 238 155 Q 215 250 200 350 Z" />
+          <path d="M 230 150 Q 180 120 150 140 Q 190 135 235 160 Q 220 100 240 70 Q 245 110 235 160 Q 260 110 300 120 Q 265 135 235 170 Q 280 150 310 180 Q 265 170 235 180 Z" />
+          <path d="M 235 355 Q 240 300 260 250 L 268 255 Q 250 305 245 355 Z" />
+          <path d="M 260 250 Q 230 225 210 240 Q 235 235 265 255 Q 250 220 260 200 Q 270 225 265 255 Q 280 220 305 230 Q 275 245 265 260 Q 295 240 315 260 Q 280 255 265 265 Z" />
         </g>
+
+        <!-- Waves (Overlap the hull) -->
         <g class="waves">
-          <path class="w w1" d="M-700 320 Q-650 306 -600 320 T-500 320 T-400 320 T-300 320 T-200 320 T-100 320 T0 320 T100 320 T200 320 T300 320 T400 320 T500 320 T600 320 T700 320 T800 320 T900 320 T1000 320 T1100 320 T1200 320 T1300 320 T1400 320 T1500 320 V900 H-700Z" fill="#0a74b8"/>
-          <path class="w w2" d="M-700 345 Q-650 331 -600 345 T-500 345 T-400 345 T-300 345 T-200 345 T-100 345 T0 345 T100 345 T200 345 T300 345 T400 345 T500 345 T600 345 T700 345 T800 345 T900 345 T1000 345 T1100 345 T1200 345 T1300 345 T1400 345 T1500 345 V900 H-700Z" fill="#0c6aa8" opacity=".9"/>
-          <path class="w w3" d="M-700 372 Q-650 358 -600 372 T-500 372 T-400 372 T-300 372 T-200 372 T-100 372 T0 372 T100 372 T200 372 T300 372 T400 372 T500 372 T600 372 T700 372 T800 372 T900 372 T1000 372 T1100 372 T1200 372 T1300 372 T1400 372 T1500 372 V900 H-700Z" fill="#0a5b92"/>
+          <path class="w w1" d="M -100 310 Q 0 300 100 310 T 300 310 T 500 310 T 700 310 T 900 310 L 900 500 L -100 500 Z" fill="url(#wave1)" opacity="0.9"/>
+          <path class="w w2" d="M -100 330 Q 0 320 100 330 T 300 330 T 500 330 T 700 330 T 900 330 L 900 500 L -100 500 Z" fill="url(#wave2)" opacity="0.9"/>
+          <path class="w w3" d="M -100 350 Q 0 340 100 350 T 300 350 T 500 350 T 700 350 T 900 350 L 900 500 L -100 500 Z" fill="url(#wave3)"/>
         </g>
       </svg>
 
@@ -149,24 +176,21 @@
       </div>
     </section>
 
-    <!-- OFFICIAL APPROVAL (Fixed Image Size & Layout) -->
+    <!-- OFFICIAL APPROVAL -->
     <section id="approval" class="card reveal">
       <h2>✅ Official Permission Approved</h2>
       <p class="muted">This tour is officially approved by the Leading University Authority. You can view the permission letters below.</p>
-      <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top:15px; justify-content:center;">
-        
-        <!-- First Letter -->
-        <a href="assets/approval-1.jpg" target="_blank" style="flex:1; min-width:250px; max-width:350px; display:block;">
-          <img src="assets/approval-1.jpg" alt="Approval Letter 1" style="width:100%; height:250px; object-fit:cover; object-position:top; border-radius:12px; box-shadow:var(--shadow); border:1px solid var(--line); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+      
+      <div class="approval-grid">
+        <a href="assets/approval-1.jpg" target="_blank">
+          <img src="assets/approval-1.jpg" alt="Approval Letter 1" class="approval-img" loading="lazy" decoding="async">
         </a>
-        
-        <!-- Second Letter -->
-        <a href="assets/approval-2.jpg" target="_blank" style="flex:1; min-width:250px; max-width:350px; display:block;">
-          <img src="assets/approval-2.jpg" alt="Approval Letter 2" style="width:100%; height:250px; object-fit:cover; object-position:top; border-radius:12px; box-shadow:var(--shadow); border:1px solid var(--line); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        <a href="assets/approval-2.jpg" target="_blank">
+          <img src="assets/approval-2.jpg" alt="Approval Letter 2" class="approval-img" loading="lazy" decoding="async">
         </a>
-
       </div>
-      <p class="muted" style="text-align:center; margin-top:10px; font-size:0.85rem;">Click on the images to view them in full size.</p>
+      
+      <p class="muted" style="text-align: center; margin-top: 12px; font-size: 0.85rem;">Click on an image to view it in full size.</p>
     </section>
 
     <!-- FORM -->
@@ -182,7 +206,6 @@
       <div class="bar"><div id="bar"></div></div>
 
       <form id="regForm" novalidate autocomplete="on">
-        <!-- honeypot -->
         <div class="hp" aria-hidden="true">
           <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
         </div>
@@ -235,7 +258,7 @@
             <small class="err"></small>
           </div>
           <div class="field" id="femBlock" hidden>
-            <span data-i18n="fBring">Will a guardian travel with you? (extra BDT 10,000)</span>
+            <span data-i18n="fBring">Will a guardian travel with you?</span>
             <div class="seg">
               <label><input type="radio" name="bringGuardian" value="Yes"><b data-i18n="yes">Yes</b></label>
               <label><input type="radio" name="bringGuardian" value="No"><b data-i18n="no">No</b></label>
@@ -290,7 +313,6 @@
     <section class="card contact reveal" id="contactBox">
       <h3 data-i18n="cTitle">Need help?</h3>
       <p id="contactText" class="muted"></p>
-      <!-- Facebook Page Link -->
       <p style="margin-top:12px; font-weight:600;">
         Follow our Facebook Page for updates: 
         <a href="https://www.facebook.com/share/1C5TWmXUzJ/" target="_blank" style="color:var(--sun); text-decoration:underline;">Click Here</a>
@@ -301,7 +323,6 @@
   <footer class="footer">
     <img src="assets/lu-logo.png" alt="Leading University">
     <p data-i18n="footer">CSE 63rd Batch · Leading University, Sylhet</p>
-    <!-- Developer Credit -->
     <p style="margin-top:12px; font-size:0.85rem; font-weight:600; color:var(--sea);">
       Developed by: Mujakkir Maher (63_A)
     </p>

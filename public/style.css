@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. Variables & Theme Setup
+   1. Root Variables & Theme Setup
    ========================================================================== */
 :root {
   --sun: #f26a21;
@@ -29,7 +29,7 @@
 }
 
 /* ==========================================================================
-   2. Base & Reset
+   2. Base & Reset Styles
    ========================================================================== */
 * {
   box-sizing: border-box;
@@ -115,7 +115,7 @@ body {
 }
 
 /* ==========================================================================
-   4. Hero Section
+   4. Hero Section & Animations
    ========================================================================== */
 main {
   max-width: 880px;
@@ -149,7 +149,7 @@ main {
 
 .sun circle {
   animation: glow 5s ease-in-out infinite alternate;
-  transform-origin: 400px 270px;
+  transform-origin: 400px 240px;
 }
 
 @keyframes glow {
@@ -260,7 +260,7 @@ h1 {
 }
 
 /* ==========================================================================
-   5. Cards & Layout
+   5. Cards & Layout (Countdown, Info Grid)
    ========================================================================== */
 .card {
   background: var(--card);
@@ -605,7 +605,7 @@ select:focus {
 }
 
 /* ==========================================================================
-   7. Schedule & Fees
+   7. Schedule (Timeline) & Fees
    ========================================================================== */
 .timeline {
   list-style: none;
@@ -739,7 +739,7 @@ select:focus {
 }
 
 /* ==========================================================================
-   8. Approval Section Fix
+   8. Approval Section (Fixed for Mobile - `contain` added)
    ========================================================================== */
 .approval-grid {
   display: flex;
@@ -747,24 +747,27 @@ select:focus {
   flex-wrap: wrap;
   margin-top: 15px;
   justify-content: center;
+  width: 100%;
 }
 
 .approval-grid a {
   flex: 1 1 200px;
+  min-width: 0;
   display: block;
   text-decoration: none;
 }
 
 .approval-img {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: top;
+  height: 250px;
+  object-fit: contain; /* Changed from cover to contain so bottom isn't cut off */
+  background: #fff;
   border-radius: 12px;
   border: 1.5px solid var(--line);
   box-shadow: var(--shadow);
   transition: transform 0.2s ease, opacity 0.2s ease;
   display: block;
+  padding: 5px;
 }
 
 .approval-img:hover {
@@ -773,7 +776,7 @@ select:focus {
 }
 
 /* ==========================================================================
-   9. Footer & Animations
+   9. Footer & Utility
    ========================================================================== */
 .footer {
   text-align: center;
@@ -819,7 +822,7 @@ select:focus {
    ========================================================================== */
 @media (max-width: 600px) {
   .approval-grid a {
-    flex: 1 1 100%; /* মোবাইলে ছবি একটার নিচে আরেকটা থাকবে */
+    flex: 1 1 100%;
   }
 }
 

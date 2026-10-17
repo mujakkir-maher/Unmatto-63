@@ -57,8 +57,8 @@
       p3d: "By 5 December",
       p3x: "Pay the remaining amount.",
       femTitle: "For Female Students",
-      femText: "Female students may bring one verified guardian. An additional fee of BDT 10,000 applies for the guardian.",
-      fBring: "Will a guardian travel with you? (extra BDT 10,000)",
+      femText: "Female students may bring one verified guardian.",
+      fBring: "Will a guardian travel with you?",
       yes: "হ্যাঁ", no: "না",
       cdOpenTitle: "রেজিস্ট্রেশন শুরু হতে বাকি", op: "শুরু: ",
       notOpenTitle: "রেজিস্ট্রেশন এখনো শুরু হয়নি", notOpenMsg: "কাউন্টডাউন শেষ হলে এই পাতাতেই ফর্ম খুলে যাবে।", errNotOpen: "রেজিস্ট্রেশন এখনো শুরু হয়নি।"
@@ -110,8 +110,8 @@
       p3d: "By 5 December",
       p3x: "Pay the remaining amount.",
       femTitle: "For Female Students",
-      femText: "Female students may bring one verified guardian. An additional fee of BDT 10,000 applies for the guardian.",
-      fBring: "Will a guardian travel with you? (extra BDT 10,000)",
+      femText: "Female students may bring one verified guardian.",
+      fBring: "Will a guardian travel with you?",
       yes: "Yes", no: "No",
       cdOpenTitle: "Registration opens in", op: "Opens: ",
       notOpenTitle: "Registration has not started yet", notOpenMsg: "The form will open on this page when the countdown ends.", errNotOpen: "Registration has not started yet."
@@ -135,7 +135,6 @@
     $$(".err").forEach(function (e) { e.textContent = ""; });
   }
 
-  /* ---------- theme ---------- */
   var theme = sget("theme") || (window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
   function applyTheme() {
     document.documentElement.setAttribute("data-theme", theme);
@@ -144,7 +143,6 @@
   $("#themeBtn").addEventListener("click", function () { theme = theme === "dark" ? "light" : "dark"; sset("theme", theme); applyTheme(); });
   $("#langBtn").addEventListener("click", function () { lang = lang === "bn" ? "en" : "bn"; sset("lang", lang); applyLang(); });
 
-  /* ---------- countdown ---------- */
   var deadline = new Date(CFG.deadline).getTime();
   var opens = CFG.opens ? new Date(CFG.opens).getTime() : NaN;
   var closed = false, locked = false;
@@ -155,16 +153,43 @@
     return "open";
   }
   function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
   function renderDeadlineText() {
     var before = phase() === "before";
     var target = before ? opens : deadline;
     if (isNaN(target)) { $("#deadlineText").textContent = ""; return; }
-    var opts = { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Dhaka" };
-    var f;
-    try { f = new Intl.DateTimeFormat(lang === "bn" ? "bn-BD" : "en-GB", opts); }
-    catch (e) { f = new Intl.DateTimeFormat("en-GB", opts); }
-    $("#deadlineText").textContent = t(before ? "op" : "dl") + f.format(new Date(target));
+    
+    var d = new Date(target);
+    
+    if (lang === "bn") {
+      var months = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+      var dateStr = d.getDate();
+      var monthStr = months[d.getMonth()];
+      var yearStr = d.getFullYear();
+      
+      var bnDate = String(dateStr).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
+      var bnYear = String(yearStr).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
+      
+      var hours = d.getHours();
+      var minutes = d.getMinutes();
+      var ampm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12;
+      hours = hours ? hours : 12; 
+      var strMinutes = minutes < 10 ? '0' + minutes : minutes;
+      
+      var bnHours = String(hours).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
+      var bnMinutes = String(strMinutes).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
+
+      $("#deadlineText").textContent = t(before ? "op" : "dl") + bnDate + " " + monthStr + ", " + bnYear + " | " + bnHours + ":" + bnMinutes + " " + ampm;
+    } else {
+      var opts = { dateStyle: "long", timeStyle: "short", timeZone: "Asia/Dhaka" };
+      var f;
+      try { f = new Intl.DateTimeFormat("en-GB", opts); }
+      catch (e) { f = new Intl.DateTimeFormat("en-GB", opts); }
+      $("#deadlineText").textContent = t(before ? "op" : "dl") + f.format(d);
+    }
   }
+
   function tick() {
     var ph = phase();
     if (ph === "before" && !locked) lockForm("before");
@@ -192,7 +217,6 @@
     applyLang();
   }
 
-  /* ---------- contacts ---------- */
   function renderContacts() {
     var el = $("#contactText");
     el.textContent = "";
@@ -207,7 +231,6 @@
     if (!(CFG.contacts || []).length) $("#contactBox").hidden = true;
   }
 
-  /* ---------- sections dropdown ---------- */
   (function () {
     var sel = $("select[name=section]");
     var o = document.createElement("option"); o.value = ""; o.setAttribute("data-i18n", "select"); sel.appendChild(o);
@@ -215,7 +238,6 @@
   })();
   (function () { var o = $("select[name=guardianRelation] option[value='']"); if (o) o.setAttribute("data-i18n", "select"); })();
 
-  /* ---------- validation ---------- */
   var form = $("#regForm");
   function normMobile(v) {
     v = String(v || "").replace(/[\s\-()]/g, "");
@@ -275,7 +297,6 @@
     if (nm === "consent" && form.consent.checked) $("#consentErr").textContent = "";
   });
 
-  /* ---------- female-only guardian question ---------- */
   $$("input[name=gender]").forEach(function (r) {
     r.addEventListener("change", function () {
       var fem = fieldVal("gender") === "Female";
@@ -284,7 +305,6 @@
     });
   });
 
-  /* ---------- stepper ---------- */
   var step = 1, TOTAL = 3;
   function showStep(n) {
     step = n;
@@ -302,7 +322,6 @@
     if (e.key === "Enter" && e.target.tagName !== "BUTTON") { e.preventDefault(); if (step < TOTAL) $("#nextBtn").click(); else form.requestSubmit(); }
   });
 
-  /* ---------- submit ---------- */
   var sending = false;
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -351,7 +370,6 @@
     confetti();
   }
 
-  /* ---------- confetti ---------- */
   function confetti() {
     if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     var cv = $("#confetti"), ctx = cv.getContext("2d");
@@ -375,19 +393,16 @@
     })(start);
   }
 
-  /* ---------- reveal on scroll ---------- */
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .12 });
     $$(".reveal").forEach(function (el) { io.observe(el); });
   } else { $$(".reveal").forEach(function (el) { el.classList.add("in"); }); }
 
-  /* ---------- hide broken images ---------- */
   $$("img").forEach(function (img) {
     function hide() { img.style.display = "none"; }
     img.addEventListener("error", hide);
     if (img.complete && img.naturalWidth === 0) hide();
   });
 
-  /* ---------- init ---------- */
   applyTheme(); applyLang(); showStep(1); tick(); setInterval(tick, 1000);
 })();
