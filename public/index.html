@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="bn" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>উন্মত্ত ৬৩ | Tour Pre-registration</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="LU CSE-63 official batch tour registration: Cox's Bazar and Saint Martin, 12-18 December 2026.">
+  <meta name="theme-color" content="#f26a21">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Unmotto 63">
+      <img src="assets/logo.png" alt="" class="brand-logo">
+      <span data-i18n="brand">উন্মত্ত ৬৩</span>
+    </a>
+    <nav class="tools">
+      <button id="langBtn" class="chip" type="button" aria-label="Language">EN</button>
+      <button id="themeBtn" class="chip" type="button" aria-label="Theme">🌙</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <svg class="scene" viewBox="0 0 800 420" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="sunG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f4511e"/>
+            <stop offset=".55" stop-color="#fb8c1f"/>
+            <stop offset="1" stop-color="#ffb81f"/>
+          </linearGradient>
+          <clipPath id="sunClip"><circle cx="400" cy="270" r="150"/></clipPath>
+        </defs>
+        <g class="sun"><circle cx="400" cy="270" r="150" fill="url(#sunG)"/></g>
+        <g clip-path="url(#sunClip)" class="boat">
+          <path d="M455 262 L505 262 L505 188 Q470 215 455 262Z" fill="none" stroke="#0e2a47" stroke-width="3"/>
+          <path d="M440 276 Q480 262 530 270 L520 282 L452 284Z" fill="#0e2a47"/>
+        </g>
+        <g class="palms" fill="#0e2a47">
+          <path d="M236 300 Q250 220 270 150 L278 152 Q262 230 252 300Z"/>
+          <path d="M272 148 q-40-30-70-8 q35-10 68 12 q-20-45-8-72 q18 40 14 70 q30-35 62-30 q-35 5-60 32 q40-6 60 22 q-40-22-66-8Z"/>
+          <path d="M296 300 Q300 250 330 215 L335 219 Q312 252 308 300Z"/>
+          <path d="M330 214 q-26-18-50-4 q26-4 48 10 q-12-30-2-46 q12 26 6 44 q22-18 42-10 q-24 6-40 22 q26-2 40 12 q-26-12-44-4Z"/>
+          <path d="M150 316 Q260 286 400 308 L400 330 L150 330Z" opacity=".95"/>
+        </g>
+        <g class="waves">
+          <path class="w w1" d="M-700 320 Q-650 306 -600 320 T-500 320 T-400 320 T-300 320 T-200 320 T-100 320 T0 320 T100 320 T200 320 T300 320 T400 320 T500 320 T600 320 T700 320 T800 320 T900 320 T1000 320 T1100 320 T1200 320 T1300 320 T1400 320 T1500 320 V900 H-700Z" fill="#0a74b8"/>
+          <path class="w w2" d="M-700 345 Q-650 331 -600 345 T-500 345 T-400 345 T-300 345 T-200 345 T-100 345 T0 345 T100 345 T200 345 T300 345 T400 345 T500 345 T600 345 T700 345 T800 345 T900 345 T1000 345 T1100 345 T1200 345 T1300 345 T1400 345 T1500 345 V900 H-700Z" fill="#0c6aa8" opacity=".9"/>
+          <path class="w w3" d="M-700 372 Q-650 358 -600 372 T-500 372 T-400 372 T-300 372 T-200 372 T-100 372 T0 372 T100 372 T200 372 T300 372 T400 372 T500 372 T600 372 T700 372 T800 372 T900 372 T1000 372 T1100 372 T1200 372 T1300 372 T1400 372 T1500 372 V900 H-700Z" fill="#0a5b92"/>
+        </g>
+      </svg>
+
+      <div class="hero-copy">
+        <img src="assets/logo.png" alt="উন্মত্ত ৬৩ logo" class="hero-logo">
+        <p class="eyebrow" data-i18n="eyebrow">CSE 63rd Batch · Leading University</p>
+        <h1 data-i18n="title">উন্মত্ত ৬৩</h1>
+        <p class="tagline" data-i18n="tagline">স্বপ্নের খোঁজে ‘সীমানাহীন’</p>
+        <p class="route" data-i18n="route">কক্সবাজার ✦ সেন্ট মার্টিন · ১২–১৮ ডিসেম্বর</p>
+        <a href="#register" class="cta" data-i18n="cta">Pre-register now</a>
+      </div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="card countdown-card" aria-live="polite">
+      <h2 data-i18n="cdTitle">Pre-registration closes in</h2>
+      <div class="countdown" id="countdown">
+        <div><b id="cdD">--</b><span data-i18n="d">Days</span></div>
+        <div><b id="cdH">--</b><span data-i18n="h">Hours</span></div>
+        <div><b id="cdM">--</b><span data-i18n="m">Min</span></div>
+        <div><b id="cdS">--</b><span data-i18n="s">Sec</span></div>
+      </div>
+      <p class="muted" id="deadlineText"></p>
+    </section>
+
+    <!-- INFO -->
+    <section class="grid3">
+      <article class="card info reveal">
+        <div class="ico">🌅</div>
+        <h3 data-i18n="i1t">কোথায়</h3>
+        <p data-i18n="i1p">কক্সবাজার সমুদ্রসৈকত আর সেন্ট মার্টিন দ্বীপ।</p>
+      </article>
+      <article class="card info reveal">
+        <div class="ico">🗓️</div>
+        <h3 data-i18n="i2t">কখন</h3>
+        <p id="tourDateText" data-i18n="i2p">১২ ডিসেম্বর (রাত) থেকে ১৮ ডিসেম্বর (সকাল)। সম্ভাব্য শিডিউল নিচে দেখুন।</p>
+      </article>
+      <article class="card info reveal">
+        <div class="ico">🛡️</div>
+        <h3 data-i18n="i3t">যাচাই</h3>
+        <p data-i18n="i3p">প্রি-রেজিস্ট্রেশন শুধু আগ্রহ জানানোর জন্য। অভিভাবকের সাথে ফোনে যাচাই করা হবে।</p>
+      </article>
+    </section>
+
+    <!-- SCHEDULE -->
+    <section id="schedule" class="card reveal">
+      <h2 data-i18n="scTitle">সম্ভাব্য ট্যুর শিডিউল</h2>
+      <ol class="timeline">
+        <li><b data-i18n="sc1d"></b><span data-i18n="sc1t"></span></li>
+        <li><b data-i18n="sc2d"></b><span data-i18n="sc2t"></span></li>
+        <li><b data-i18n="sc3d"></b><span data-i18n="sc3t"></span></li>
+        <li><b data-i18n="sc4d"></b><span data-i18n="sc4t"></span></li>
+        <li><b data-i18n="sc5d"></b><span data-i18n="sc5t"></span></li>
+        <li><b data-i18n="sc6d"></b><span data-i18n="sc6t"></span></li>
+      </ol>
+      <p class="note" data-i18n="scNote"></p>
+    </section>
+
+    <!-- FEES -->
+    <section id="fees" class="card reveal">
+      <h2 data-i18n="feeTitle">Fees &amp; Payment Deadlines</h2>
+      <div class="total">
+        <span data-i18n="feeTotal"></span>
+        <b data-i18n="feeAmt"></b>
+      </div>
+      <p class="note" data-i18n="scNote" style="margin-top:10px"></p>
+      <div class="paygrid">
+        <div class="pay">
+          <i>1</i>
+          <h3 data-i18n="p1t"></h3>
+          <em data-i18n="p1d"></em>
+          <p data-i18n="p1x"></p>
+        </div>
+        <div class="pay">
+          <i>2</i>
+          <h3 data-i18n="p2t"></h3>
+          <strong data-i18n="p2a"></strong>
+          <em data-i18n="p2d"></em>
+          <p data-i18n="p2x"></p>
+        </div>
+        <div class="pay">
+          <i>3</i>
+          <h3 data-i18n="p3t"></h3>
+          <strong data-i18n="p3a"></strong>
+          <em data-i18n="p3d"></em>
+          <p data-i18n="p3x"></p>
+        </div>
+      </div>
+      <div class="fem">
+        <h3 data-i18n="femTitle"></h3>
+        <p data-i18n="femText"></p>
+      </div>
+    </section>
+
+    <!-- OFFICIAL APPROVAL (Fixed Image Size & Layout) -->
+    <section id="approval" class="card reveal">
+      <h2>✅ Official Permission Approved</h2>
+      <p class="muted">This tour is officially approved by the Leading University Authority. You can view the permission letters below.</p>
+      <div style="display:flex; gap:15px; flex-wrap:wrap; margin-top:15px; justify-content:center;">
+        
+        <!-- First Letter -->
+        <a href="assets/approval-1.jpg" target="_blank" style="flex:1; min-width:250px; max-width:350px; display:block;">
+          <img src="assets/approval-1.jpg" alt="Approval Letter 1" style="width:100%; height:250px; object-fit:cover; object-position:top; border-radius:12px; box-shadow:var(--shadow); border:1px solid var(--line); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        
+        <!-- Second Letter -->
+        <a href="assets/approval-2.jpg" target="_blank" style="flex:1; min-width:250px; max-width:350px; display:block;">
+          <img src="assets/approval-2.jpg" alt="Approval Letter 2" style="width:100%; height:250px; object-fit:cover; object-position:top; border-radius:12px; box-shadow:var(--shadow); border:1px solid var(--line); transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+
+      </div>
+      <p class="muted" style="text-align:center; margin-top:10px; font-size:0.85rem;">Click on the images to view them in full size.</p>
+    </section>
+
+    <!-- FORM -->
+    <section id="register" class="card form-card reveal">
+      <h2 data-i18n="formTitle">Pre-registration</h2>
+      <p class="muted" data-i18n="formNote">এটি শুধু প্রি-রেজিস্ট্রেশন। প্রথম ধাপের কনফার্মেশন ফি জমা দেওয়ার পরই আপনার সিট নিশ্চিত হবে। যাচাইয়ের জন্য আমরা আপনার অভিভাবককে কল করতে পারি।</p>
+
+      <ol class="steps" id="steps" aria-hidden="true">
+        <li class="on"><i>1</i><span data-i18n="st1">You</span></li>
+        <li><i>2</i><span data-i18n="st2">Contact</span></li>
+        <li><i>3</i><span data-i18n="st3">Guardian</span></li>
+      </ol>
+      <div class="bar"><div id="bar"></div></div>
+
+      <form id="regForm" novalidate autocomplete="on">
+        <!-- honeypot -->
+        <div class="hp" aria-hidden="true">
+          <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <fieldset class="step active" data-step="1">
+          <label class="field">
+            <span data-i18n="fName">Full name (as on ID card)</span>
+            <input name="name" type="text" required minlength="3" maxlength="80" autocomplete="name">
+            <small class="err"></small>
+          </label>
+          <label class="field">
+            <span data-i18n="fId">Student ID</span>
+            <input name="studentId" type="text" inputmode="numeric" required maxlength="24" autocomplete="off">
+            <small class="err"></small>
+          </label>
+          <label class="field">
+            <span data-i18n="fSection">Section</span>
+            <select name="section" required></select>
+            <small class="err"></small>
+          </label>
+          <div class="field">
+            <span data-i18n="fTshirt">T-shirt size</span>
+            <div class="seg wrap">
+              <label><input type="radio" name="tshirt" value="S" required><b>S</b></label>
+              <label><input type="radio" name="tshirt" value="M"><b>M</b></label>
+              <label><input type="radio" name="tshirt" value="L"><b>L</b></label>
+              <label><input type="radio" name="tshirt" value="XL"><b>XL</b></label>
+              <label><input type="radio" name="tshirt" value="XXL"><b>XXL</b></label>
+            </div>
+            <small class="err"></small>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="2">
+          <label class="field">
+            <span data-i18n="fMobile">Your mobile number</span>
+            <input name="mobile" type="tel" inputmode="tel" required placeholder="01XXXXXXXXX" autocomplete="tel">
+            <small class="err"></small>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="whatsappSame" checked>
+            <span data-i18n="fWa">This number is on WhatsApp</span>
+          </label>
+          <div class="field">
+            <span data-i18n="fGender">Gender</span>
+            <div class="seg">
+              <label><input type="radio" name="gender" value="Male" required><b data-i18n="gM">Male</b></label>
+              <label><input type="radio" name="gender" value="Female"><b data-i18n="gF">Female</b></label>
+            </div>
+            <small class="err"></small>
+          </div>
+          <div class="field" id="femBlock" hidden>
+            <span data-i18n="fBring">Will a guardian travel with you? (extra BDT 10,000)</span>
+            <div class="seg">
+              <label><input type="radio" name="bringGuardian" value="Yes"><b data-i18n="yes">Yes</b></label>
+              <label><input type="radio" name="bringGuardian" value="No"><b data-i18n="no">No</b></label>
+            </div>
+            <small class="err"></small>
+          </div>
+        </fieldset>
+
+        <fieldset class="step" data-step="3">
+          <label class="field">
+            <span data-i18n="fGName">Guardian's name</span>
+            <input name="guardianName" type="text" required minlength="3" maxlength="80">
+            <small class="err"></small>
+          </label>
+          <label class="field">
+            <span data-i18n="fGRel">Relation</span>
+            <select name="guardianRelation" required>
+              <option value="" data-i18n="select">Select</option>
+              <option value="Father" data-i18n="rF">Father</option>
+              <option value="Mother" data-i18n="rM">Mother</option>
+              <option value="Other" data-i18n="rO">Other</option>
+            </select>
+            <small class="err"></small>
+          </label>
+          <label class="field">
+            <span data-i18n="fGMobile">Guardian's mobile (we will call to verify)</span>
+            <input name="guardianMobile" type="tel" inputmode="tel" required placeholder="01XXXXXXXXX">
+            <small class="err"></small>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="consent" required>
+            <span data-i18n="fConsent">আমি আমার অভিভাবককে এই ট্যুর সম্পর্কে জানিয়েছি এবং যাচাইয়ের জন্য তার নম্বর ব্যবহারে সম্মত।</span>
+          </label>
+          <small class="err" id="consentErr"></small>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" class="btn ghost" id="prevBtn" data-i18n="back">Back</button>
+          <button type="button" class="btn" id="nextBtn" data-i18n="next">Next</button>
+          <button type="submit" class="btn primary" id="submitBtn" data-i18n="submit">Submit</button>
+        </div>
+        <p class="status" id="status" role="status"></p>
+      </form>
+
+      <div class="success" id="success" hidden>
+        <div class="tick">✓</div>
+        <h3 data-i18n="okTitle">Registration received!</h3>
+        <p data-i18n="okText">আমরা শীঘ্রই আপনার অভিভাবককে কল করে যাচাই করব। সব আপডেট ব্যাচের গ্রুপে জানানো হবে।</p>
+      </div>
+    </section>
+
+    <section class="card contact reveal" id="contactBox">
+      <h3 data-i18n="cTitle">Need help?</h3>
+      <p id="contactText" class="muted"></p>
+      <!-- Facebook Page Link -->
+      <p style="margin-top:12px; font-weight:600;">
+        Follow our Facebook Page for updates: 
+        <a href="https://www.facebook.com/share/1C5TWmXUzJ/" target="_blank" style="color:var(--sun); text-decoration:underline;">Click Here</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <img src="assets/lu-logo.png" alt="Leading University">
+    <p data-i18n="footer">CSE 63rd Batch · Leading University, Sylhet</p>
+    <!-- Developer Credit -->
+    <p style="margin-top:12px; font-size:0.85rem; font-weight:600; color:var(--sea);">
+      Developed by: Mujakkir Maher (63_A)
+    </p>
+  </footer>
+
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

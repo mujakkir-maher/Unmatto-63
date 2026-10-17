@@ -1,0 +1,843 @@
+/* ==========================================================================
+   1. Variables & Theme Setup
+   ========================================================================== */
+:root {
+  --sun: #f26a21;
+  --sun2: #ffb81f;
+  --sea: #0a74b8;
+  --navy: #0e2a47;
+  --bg: #fff8f0;
+  --bg2: #ffffff;
+  --ink: #14243a;
+  --muted: #5b6b80;
+  --line: #f0dfcc;
+  --card: #ffffffd9;
+  --shadow: 0 10px 30px rgba(14, 42, 71, 0.12);
+  --err: #d63031;
+  --ok: #1f9d63;
+  --radius: 18px;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1a2c;
+  --bg2: #10243b;
+  --ink: #eaf2fb;
+  --muted: #9fb3c8;
+  --line: #223a56;
+  --card: #10243bd9;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* ==========================================================================
+   2. Base & Reset
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Hind Siliguri", "Poppins", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(1200px 500px at 50% -10%, #ffd9a840, transparent 60%),
+              linear-gradient(180deg, var(--bg), var(--bg2));
+}
+
+:root[data-theme="dark"] .sky {
+  background: radial-gradient(900px 500px at 50% -10%, #f26a2130, transparent 60%),
+              linear-gradient(180deg, var(--bg), var(--bg2));
+}
+
+/* ==========================================================================
+   3. Topbar & Navigation
+   ========================================================================== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  backdrop-filter: blur(12px);
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.tools {
+  display: flex;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font: 600 0.85rem "Poppins", sans-serif;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chip:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+/* ==========================================================================
+   4. Hero Section
+   ========================================================================== */
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 16px 40px;
+}
+
+.hero {
+  --sceneH: min(52vw, 420px);
+  position: relative;
+  margin: 0 -16px 0;
+  padding-bottom: calc(var(--sceneH) * 0.84);
+  overflow: hidden;
+  border-radius: 0 0 36px 36px;
+  background: linear-gradient(180deg, #ffe3bf 0%, #ffc27a 45%, #ff9a4d 100%);
+}
+
+:root[data-theme="dark"] .hero {
+  background: linear-gradient(180deg, #14233f 0%, #4a2b4f 55%, #c8582b 100%);
+}
+
+.scene {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--sceneH);
+  overflow: visible;
+}
+
+.sun circle {
+  animation: glow 5s ease-in-out infinite alternate;
+  transform-origin: 400px 270px;
+}
+
+@keyframes glow {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+
+.boat {
+  animation: bob 4s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translate(-14px, 0); }
+  50% { transform: translate(18px, -3px); }
+}
+
+.palms {
+  transform-origin: 260px 300px;
+  animation: sway 6s ease-in-out infinite alternate;
+}
+
+@keyframes sway {
+  from { transform: rotate(-0.8deg); }
+  to { transform: rotate(0.8deg); }
+}
+
+.w1 { animation: wave 7s linear infinite; }
+.w2 { animation: wave 5s linear infinite reverse; }
+.w3 { animation: wave 9s linear infinite; }
+
+@keyframes wave {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100px); }
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 36px 18px 0;
+  color: var(--navy);
+}
+
+:root[data-theme="dark"] .hero-copy {
+  color: #fff;
+}
+
+.hero-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: #fffffff0;
+  border-radius: 50%;
+  padding: 8px;
+  box-shadow: var(--shadow);
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
+
+.eyebrow {
+  margin: 14px 0 0;
+  font: 600 0.8rem "Poppins", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+h1 {
+  margin: 4px 0;
+  font-size: clamp(2.6rem, 10vw, 4.6rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.tagline {
+  font-size: clamp(1.05rem, 3.4vw, 1.4rem);
+  margin: 0;
+  font-weight: 500;
+}
+
+.route {
+  margin: 10px 0 22px;
+  font-weight: 600;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--navy);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: 999px;
+  box-shadow: 0 8px 22px rgba(14, 42, 71, 0.35);
+  transition: 0.25s;
+}
+
+.cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  background: var(--sun);
+}
+
+:root[data-theme="dark"] .cta {
+  background: var(--sun);
+}
+
+/* ==========================================================================
+   5. Cards & Layout
+   ========================================================================== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+}
+
+h3 {
+  margin: 0 0 4px;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.countdown div {
+  background: linear-gradient(160deg, var(--sun), var(--sun2));
+  color: #fff;
+  border-radius: 14px;
+  padding: 14px 4px;
+  text-align: center;
+}
+
+.countdown b {
+  display: block;
+  font: 700 1.9rem "Poppins", sans-serif;
+  line-height: 1;
+}
+
+.countdown span {
+  font-size: 0.78rem;
+  opacity: 0.95;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.info .ico {
+  font-size: 2rem;
+}
+
+.info p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.info {
+  transition: 0.25s;
+}
+
+.info:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+}
+
+/* ==========================================================================
+   6. Form & Steps
+   ========================================================================== */
+.steps {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+  margin: 14px 0 8px;
+}
+
+.steps li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.steps i {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--line);
+  font-style: normal;
+  transition: 0.3s;
+}
+
+.steps li.on {
+  color: var(--ink);
+}
+
+.steps li.on i {
+  background: var(--sun);
+  color: #fff;
+  transform: scale(1.12);
+}
+
+.steps li.done i {
+  background: var(--ok);
+  color: #fff;
+}
+
+.bar {
+  height: 6px;
+  background: var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+#bar {
+  height: 100%;
+  width: 33%;
+  background: linear-gradient(90deg, var(--sun), var(--sun2));
+  border-radius: 6px;
+  transition: width 0.4s ease;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+
+fieldset.active {
+  display: block;
+  animation: slide 0.35s ease;
+}
+
+@keyframes slide {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+.field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field > span {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background: var(--bg2);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--sun);
+  box-shadow: 0 0 0 4px #f26a2126;
+}
+
+.field.bad input,
+.field.bad select {
+  border-color: var(--err);
+}
+
+.err {
+  display: block;
+  color: var(--err);
+  min-height: 1.1em;
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+
+.check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 6px 0 12px;
+  cursor: pointer;
+}
+
+.check input {
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  accent-color: var(--sun);
+}
+
+.seg {
+  display: flex;
+  gap: 10px;
+}
+
+.seg label {
+  flex: 1;
+  cursor: pointer;
+}
+
+.seg input {
+  position: absolute;
+  opacity: 0;
+}
+
+.seg b {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+  background: var(--bg2);
+}
+
+.seg input:checked + b {
+  background: var(--sun);
+  color: #fff;
+  border-color: var(--sun);
+  transform: scale(1.03);
+}
+
+.seg.wrap {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.seg.wrap label {
+  flex: 1 0 48px;
+}
+
+.hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn {
+  flex: 1;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  background: var(--navy);
+  color: #fff;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, var(--sun), #e5481d);
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+}
+
+.status {
+  min-height: 1.4em;
+  margin: 12px 0 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status.bad {
+  color: var(--err);
+}
+
+.success {
+  text-align: center;
+  padding: 18px 0;
+  animation: slide 0.5s ease;
+}
+
+.tick {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: var(--ok);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 2.6rem;
+  animation: pop 0.6s cubic-bezier(0.2, 1.6, 0.4, 1);
+}
+
+@keyframes pop {
+  from { transform: scale(0); }
+}
+
+.contact h3 {
+  margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   7. Schedule & Fees
+   ========================================================================== */
+.timeline {
+  list-style: none;
+  margin: 14px 0 8px;
+  padding: 0 0 0 22px;
+  border-left: 3px solid var(--line);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 18px 16px;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -31px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--sun), var(--sun2));
+  box-shadow: 0 0 0 4px var(--bg2);
+}
+
+.timeline b {
+  display: block;
+  color: var(--sun);
+  font-weight: 700;
+}
+
+.timeline span {
+  color: var(--ink);
+}
+
+.note {
+  margin: 6px 0 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #f26a2114;
+  border: 1px dashed var(--sun);
+  font-size: 0.92rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, var(--navy), #134a78);
+  color: #fff;
+}
+
+.total b {
+  font: 700 1.6rem "Hind Siliguri", "Poppins", sans-serif;
+  color: var(--sun2);
+}
+
+.paygrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.pay {
+  position: relative;
+  padding: 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg2);
+}
+
+.pay i {
+  position: absolute;
+  top: -12px;
+  left: 14px;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--sun);
+  color: #fff;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.pay h3 {
+  font-size: 1rem;
+  margin: 4px 0 2px;
+}
+
+.pay strong {
+  display: block;
+  font-size: 1.25rem;
+  color: var(--sea);
+}
+
+.pay em {
+  display: block;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--sun);
+}
+
+.pay p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.fem {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #0a74b814;
+  border-left: 4px solid var(--sea);
+}
+
+.fem h3 {
+  margin: 0 0 4px;
+  color: var(--sea);
+}
+
+.fem p {
+  margin: 0;
+}
+
+/* ==========================================================================
+   8. Approval Section Fix
+   ========================================================================== */
+.approval-grid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+.approval-grid a {
+  flex: 1 1 200px;
+  display: block;
+  text-decoration: none;
+}
+
+.approval-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  display: block;
+}
+
+.approval-img:hover {
+  transform: scale(1.02);
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   9. Footer & Animations
+   ========================================================================== */
+.footer {
+  text-align: center;
+  padding: 24px 16px 34px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.footer img {
+  height: 84px;
+  width: auto;
+  background: #fff;
+  border-radius: 14px;
+  padding: 6px;
+}
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  width: 100%;
+  height: 100%;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ==========================================================================
+   10. Media Queries
+   ========================================================================== */
+@media (max-width: 600px) {
+  .approval-grid a {
+    flex: 1 1 100%; /* মোবাইলে ছবি একটার নিচে আরেকটা থাকবে */
+  }
+}
+
+@media (max-width: 520px) {
+  .steps span { display: none; }
+  .countdown b { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
