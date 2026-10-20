@@ -10,18 +10,21 @@
  *   DEADLINE            optional  ISO time, e.g. 2026-10-25T23:59:00+06:00 (keep same as config.js)
  *   SECTIONS            optional  Comma list, e.g. 63-A,63-B,63-C,63-D
  *   ID_MIN / ID_MAX     optional  Student ID digit length range (default 6 / 20)
+ *   ID_PREFIX           optional  Student ID must start with this (e.g. 2)
+ *   RATE_MAX            optional  Max requests per IP per 10 minutes (default 40)
  *   ALLOWED_ORIGINS     optional  Comma list of allowed Origin values, e.g. https://unmotto63.netlify.app
  */
 
 const MOBILE = /^01[3-9]\d{8}$/;
 const GENDERS = ["Male", "Female"];
 const SIZES = ["S", "M", "L", "XL", "XXL"];
-const RELATIONS = ["Father", "Mother", "Other"];
+const RELATIONS = ["Father", "Mother", "Brother", "Sister", "Other"];
 
 // Best-effort rate limit (memory is per function instance, so this slows bursts, it is not absolute).
+// Limit is high on purpose: many students share one campus / mobile-data IP.
 const hits = new Map();
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_HITS = 6;
+const MAX_HITS = parseInt(process.env.RATE_MAX || "40", 10);
 
 function rateLimited(ip) {
   const now = Date.now();
@@ -49,8 +52,8 @@ function clean(s, max) {
 }
 
 function validate(b) {
-  const idMin = parseInt(process.env.ID_MIN || "6", 10);
-  const idMax = parseInt(process.env.ID_MAX || "20", 10);
+  const idMin = parseInt(process.env.ID_MIN || "16", 10);
+  const idMax = parseInt(process.env.ID_MAX || "16", 10);
   const sections = (process.env.SECTIONS || "").split(",").map((s) => s.trim()).filter(Boolean);
 
   const d = {
@@ -69,6 +72,7 @@ function validate(b) {
 
   if (d.name.length < 3) return { error: "name" };
   if (!new RegExp("^\\d{" + idMin + "," + idMax + "}$").test(d.studentId)) return { error: "studentId" };
+  if (process.env.ID_PREFIX && !d.studentId.startsWith(process.env.ID_PREFIX)) return { error: "studentId" };
   if (sections.length ? !sections.includes(d.section) : !/^[\w\- ]{1,20}$/.test(d.section)) return { error: "section" };
   if (!SIZES.includes(d.tshirt)) return { error: "tshirt" };
   if (!MOBILE.test(d.mobile)) return { error: "mobile" };
@@ -127,7 +131,8 @@ exports.handler = async function (event) {
   }
 
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 20000);
+  // 9 s: stay under Netlify's default function timeout (check your plan)
+  const timer = setTimeout(() => ctrl.abort(), 9000);
   try {
     const res = await fetch(url, {
       method: "POST",

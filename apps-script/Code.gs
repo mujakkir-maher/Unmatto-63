@@ -50,7 +50,7 @@ function doPost(e) {
     if (!secret || body.secret !== secret) return out_({ ok: false, error: 'unauthorized' });
     if (!body.studentId || !body.name) return out_({ ok: false, error: 'invalid' });
 
-    lock.waitLock(15000); // one writer at a time, so duplicate check is reliable
+    lock.waitLock(8000); // one writer at a time, so duplicate check is reliable (kept under the 9 s function timeout)
     var sh = sheet_();
     var id = String(body.studentId).trim();
 

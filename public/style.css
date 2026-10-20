@@ -118,9 +118,11 @@ body {
    4. Hero Section & Animations
    ========================================================================== */
 main {
-  max-width: 880px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 16px 40px;
+  overflow-x: hidden;
 }
 
 .hero {
@@ -182,7 +184,7 @@ main {
 
 @keyframes wave {
   from { transform: translateX(0); }
-  to { transform: translateX(-100px); }
+  to { transform: translateX(-400px); }
 }
 
 .hero-copy {
@@ -260,7 +262,7 @@ h1 {
 }
 
 /* ==========================================================================
-   5. Cards & Layout (Countdown, Info Grid)
+   5. Cards & Layout (Countdown, Info Grid) - Full Width
    ========================================================================== */
 .card {
   background: var(--card);
@@ -270,6 +272,8 @@ h1 {
   box-shadow: var(--shadow);
   margin-top: 20px;
   backdrop-filter: blur(8px);
+  width: 100%; /* Fully stretched */
+  max-width: 100%;
 }
 
 .muted {
@@ -317,6 +321,8 @@ h3 {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-top: 4px;
+  width: 100%;
+  max-width: 100%;
 }
 
 .info .ico {
@@ -739,7 +745,7 @@ select:focus {
 }
 
 /* ==========================================================================
-   8. Approval Section (Fixed for Mobile - `contain` added)
+   8. Approval Section
    ========================================================================== */
 .approval-grid {
   display: flex;
@@ -760,7 +766,7 @@ select:focus {
 .approval-img {
   width: 100%;
   height: 250px;
-  object-fit: contain; /* Changed from cover to contain so bottom isn't cut off */
+  object-fit: contain;
   background: #fff;
   border-radius: 12px;
   border: 1.5px solid var(--line);

@@ -4,6 +4,19 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
+  /* ---------- very wide waves (no hard edges on big screens) ---------- */
+  (function buildWaves() {
+    var ys = { w1: 310, w2: 330, w3: 350 };
+    Object.keys(ys).forEach(function (cls) {
+      var y = ys[cls];
+      var d = "M -2100 " + y + " Q -2000 " + (y - 10) + " -1900 " + y;
+      for (var x = -1700; x <= 2900; x += 200) d += " T " + x + " " + y;
+      d += " L 2900 500 L -2100 500 Z";
+      var p = document.querySelector("." + cls);
+      if (p) p.setAttribute("d", d);
+    });
+  })();
+
   /* ---------- storage helpers ---------- */
   function sget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function sset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -22,16 +35,18 @@
       st1: "আপনি", st2: "যোগাযোগ", st3: "অভিভাবক",
       fName: "পূর্ণ নাম (আইডি কার্ড অনুযায়ী)", fTshirt: "টি-শার্টের সাইজ", fId: "স্টুডেন্ট আইডি", fSection: "সেকশন",
       fMobile: "আপনার মোবাইল নম্বর", fWa: "এই নম্বরে হোয়াটসঅ্যাপ আছে", fGender: "জেন্ডার", gM: "ছেলে", gF: "মেয়ে",
-      fGName: "অভিভাবকের নাম", fGRel: "সম্পর্ক", select: "নির্বাচন করুন", rF: "বাবা", rM: "মা", rO: "অন্য কেউ",
+      fGName: "অভিভাবকের নাম", fGRel: "সম্পর্ক", select: "নির্বাচন করুন", rF: "বাবা", rM: "মা", rB: "ভাই", rS: "বোন",
       fGMobile: "অভিভাবকের মোবাইল (যাচাইয়ের জন্য কল করা হবে)",
       fConsent: "আমি আমার অভিভাবককে এই ট্যুর সম্পর্কে জানিয়েছি এবং যাচাইয়ের জন্য তার নম্বর ব্যবহারে সম্মত।",
       back: "পিছনে", next: "পরের ধাপ", submit: "সাবমিট করুন",
-      okTitle: "রেজিস্ট্রেশন পাওয়া গেছে!", okText: "আমরা শীঘ্রই আপনার অভিভাবককে কল করে যাচাই করব। সব আপডেট ব্যাচের গ্রুপে জানানো হবে।",
+      okTitle: "রেজিস্ট্রেশন পাওয়া গেছে!", okText: "আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে। সব আপডেট ব্যাচের গ্রুপে জানানো হবে।",
       cTitle: "সাহায্য লাগবে?", footer: "CSE ৬৩তম ব্যাচ · লিডিং ইউনিভার্সিটি, সিলেট",
       dl: "শেষ সময়: ", closedTitle: "রেজিস্ট্রেশন বন্ধ হয়ে গেছে", closedMsg: "রেজিস্ট্রেশনের সময় শেষ। প্রয়োজনে যোগাযোগ করুন।",
-      eReq: "এই ঘরটি পূরণ করুন", eName: "পূর্ণ নাম লিখুন (কমপক্ষে ৩ অক্ষর)", eId: "সঠিক স্টুডেন্ট আইডি দিন (শুধু সংখ্যা)",
-      eMob: "সঠিক মোবাইল নম্বর দিন (01XXXXXXXXX)", eSame: "অভিভাবকের নম্বর আপনার নিজের নম্বর থেকে আলাদা হতে হবে", eConsent: "এগিয়ে যেতে সম্মতি দিন",
-      sending: "পাঠানো হচ্ছে…", errDup: "এই আইডি দিয়ে আগেই রেজিস্ট্রেশন হয়েছে।", errClosed: "রেজিস্ট্রেশন বন্ধ হয়ে গেছে।",
+      eReq: "এই ঘরটি পূরণ করুন", eName: "পূর্ণ নাম লিখুন (কমপক্ষে ৩ অক্ষর)", eId: "সঠিক ১৬ ডিজিটের স্টুডেন্ট আইডি দিন",
+      eMob: "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন (01XXXXXXXXX)", eSame: "অভিভাবকের নম্বর আপনার নিজের নম্বর থেকে আলাদা হতে হবে", eConsent: "এগিয়ে যেতে সম্মতি দিন",
+      sending: "পাঠানো হচ্ছে…",
+      errDup: "এই আইডি দিয়ে আগেই রেজিস্ট্রেশন হয়েছে। আপনি যদি এইমাত্র সাবমিট করে থাকেন, তাহলে আপনার রেজিস্ট্রেশন সম্পন্ন।",
+      errClosed: "রেজিস্ট্রেশন বন্ধ হয়ে গেছে।",
       errRate: "অনেকবার চেষ্টা হয়েছে, কিছুক্ষণ পর আবার চেষ্টা করুন।", errNet: "সংযোগে সমস্যা হয়েছে, আবার চেষ্টা করুন।", errGen: "কিছু একটা ভুল হয়েছে, আবার চেষ্টা করুন।",
       contactLine: "যোগাযোগ: ",
       scTitle: "সম্ভাব্য ট্যুর শিডিউল",
@@ -41,7 +56,7 @@
       sc4d: "১৬ ডিসেম্বর (বিকেল)", sc4t: "ফিরতি শিপে সেন্ট মার্টিন থেকে কক্সবাজারে আগমন এবং কক্সবাজারে রাত্রিযাপন।",
       sc5d: "১৭ ডিসেম্বর (বিকেল/সন্ধ্যা)", sc5t: "কক্সবাজার থেকে সিলেটের উদ্দেশ্যে ফিরতি যাত্রা।",
       sc6d: "১৮ ডিসেম্বর (সকাল)", sc6t: "সিলেটে পৌঁছানো।",
-      scNote: "* Total fee may increase depending on sponsorship. Final amount will be announced in the batch group.",
+      scNote: "আমরা আমাদের ট্যুরের জন্য স্পনসর খুঁজছি। ভালো স্পনসর ব্যবস্থা হলে ট্যুরের মোট ফি আরও কমতে পারে। সম্পূর্ণ বিষয়টি আমাদের স্পনসর এবং ইউনিভার্সিটি ফান্ডিং-এর ওপর নির্ভর করছে। চূড়ান্ত ফি পরে জানানো হবে।",
       feeTitle: "Fees & Payment Deadlines",
       feeTotal: "Total fee per person (approx.)",
       feeAmt: "BDT 10,000*",
@@ -57,7 +72,7 @@
       p3d: "By 5 December",
       p3x: "Pay the remaining amount.",
       femTitle: "For Female Students",
-      femText: "Female students may bring one verified guardian.",
+      femText: "Female students may bring one verified guardian. An extra fee will be applicable (Amount will be announced later).",
       fBring: "Will a guardian travel with you?",
       yes: "হ্যাঁ", no: "না",
       cdOpenTitle: "রেজিস্ট্রেশন শুরু হতে বাকি", op: "শুরু: ",
@@ -75,16 +90,18 @@
       st1: "You", st2: "Contact", st3: "Guardian",
       fName: "Full name (as on ID card)", fTshirt: "T-shirt size", fId: "Student ID", fSection: "Section",
       fMobile: "Your mobile number", fWa: "This number is on WhatsApp", fGender: "Gender", gM: "Male", gF: "Female",
-      fGName: "Guardian's name", fGRel: "Relation", select: "Select", rF: "Father", rM: "Mother", rO: "Other",
+      fGName: "Guardian's name", fGRel: "Relation", select: "Select", rF: "Father", rM: "Mother", rB: "Brother", rS: "Sister",
       fGMobile: "Guardian's mobile (we will call to verify)",
       fConsent: "I have informed my guardian about this tour and agree to the use of their number for verification.",
       back: "Back", next: "Next", submit: "Submit",
-      okTitle: "Registration received!", okText: "We will call your guardian soon to verify. All updates will be shared in the batch group.",
+      okTitle: "Registration received!", okText: "Your registration has been successfully completed. All updates will be shared in the batch group.",
       cTitle: "Need help?", footer: "CSE 63rd Batch · Leading University, Sylhet",
       dl: "Deadline: ", closedTitle: "Registration is closed", closedMsg: "The registration period has ended. Please contact us if needed.",
-      eReq: "Please fill this in", eName: "Enter your full name (at least 3 characters)", eId: "Enter a valid student ID (digits only)",
-      eMob: "Enter a valid mobile number (01XXXXXXXXX)", eSame: "Guardian's number must differ from your own", eConsent: "Please agree to continue",
-      sending: "Sending…", errDup: "This student ID is already registered.", errClosed: "Registration is closed.",
+      eReq: "Please fill this in", eName: "Enter your full name (at least 3 characters)", eId: "Enter a valid 16-digit student ID",
+      eMob: "Enter a valid 11-digit mobile number (01XXXXXXXXX)", eSame: "Guardian's number must differ from your own", eConsent: "Please agree to continue",
+      sending: "Sending…",
+      errDup: "This student ID is already registered. If you just submitted, you're all set.",
+      errClosed: "Registration is closed.",
       errRate: "Too many attempts. Please try again in a while.", errNet: "Connection problem. Please try again.", errGen: "Something went wrong. Please try again.",
       contactLine: "Contact: ",
       scTitle: "Tentative tour schedule",
@@ -94,7 +111,7 @@
       sc4d: "16 December (afternoon)", sc4t: "Return ship from Saint Martin to Cox's Bazar, then overnight stay in Cox's Bazar.",
       sc5d: "17 December (afternoon/evening)", sc5t: "Depart from Cox's Bazar for Sylhet.",
       sc6d: "18 December (morning)", sc6t: "Arrive in Sylhet.",
-      scNote: "* Total fee may increase depending on sponsorship. Final amount will be announced in the batch group.",
+      scNote: "We are currently looking for sponsors for our tour. If we can manage good sponsors, the total fee may decrease further. The final amount depends entirely on our sponsors and university funding. The final amount will be announced later.",
       feeTitle: "Fees & Payment Deadlines",
       feeTotal: "Total fee per person (approx.)",
       feeAmt: "BDT 10,000*",
@@ -110,7 +127,7 @@
       p3d: "By 5 December",
       p3x: "Pay the remaining amount.",
       femTitle: "For Female Students",
-      femText: "Female students may bring one verified guardian.",
+      femText: "Female students may bring one verified guardian. An extra fee will be applicable (Amount will be announced later).",
       fBring: "Will a guardian travel with you?",
       yes: "Yes", no: "No",
       cdOpenTitle: "Registration opens in", op: "Opens: ",
@@ -158,25 +175,25 @@
     var before = phase() === "before";
     var target = before ? opens : deadline;
     if (isNaN(target)) { $("#deadlineText").textContent = ""; return; }
-    
+
     var d = new Date(target);
-    
+
     if (lang === "bn") {
       var months = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
       var dateStr = d.getDate();
       var monthStr = months[d.getMonth()];
       var yearStr = d.getFullYear();
-      
+
       var bnDate = String(dateStr).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
       var bnYear = String(yearStr).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
-      
+
       var hours = d.getHours();
       var minutes = d.getMinutes();
       var ampm = hours >= 12 ? "PM" : "AM";
       hours = hours % 12;
-      hours = hours ? hours : 12; 
+      hours = hours ? hours : 12;
       var strMinutes = minutes < 10 ? '0' + minutes : minutes;
-      
+
       var bnHours = String(hours).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
       var bnMinutes = String(strMinutes).replace(/\d/g, function(x) { return "০১২৩৪৫৬৭৮৯"[x]; });
 
@@ -250,7 +267,7 @@
   }
   var rules = {
     name: function (v) { return v.trim().length >= 3 ? "" : "eName"; },
-    studentId: function (v) { v = toEnDigits(v).trim(); return new RegExp("^\\d{" + CFG.idMinLen + "," + CFG.idMaxLen + "}$").test(v) ? "" : "eId"; },
+    studentId: function (v) { v = toEnDigits(v).trim(); return /^\d{16}$/.test(v) ? "" : "eId"; },
     section: function (v) { return v ? "" : "eReq"; },
     mobile: function (v) { return /^01[3-9]\d{8}$/.test(normMobile(toEnDigits(v))) ? "" : "eMob"; },
     gender: function (v) { return v ? "" : "eReq"; },
