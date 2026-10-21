@@ -4,7 +4,6 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* ---------- very wide waves (no hard edges on big screens) ---------- */
   (function buildWaves() {
     var ys = { w1: 310, w2: 330, w3: 350 };
     Object.keys(ys).forEach(function (cls) {
@@ -17,11 +16,9 @@
     });
   })();
 
-  /* ---------- storage helpers ---------- */
   function sget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function sset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
-  /* ---------- i18n ---------- */
   var T = {
     bn: {
       brand: "উন্মত্ত ৬৩", eyebrow: "CSE ৬৩তম ব্যাচ · লিডিং ইউনিভার্সিটি", title: "উন্মত্ত ৬৩",
@@ -29,14 +26,14 @@
       cdTitle: "প্রি-রেজিস্ট্রেশন শেষ হতে বাকি", d: "দিন", h: "ঘণ্টা", m: "মিনিট", s: "সেকেন্ড",
       i1t: "কোথায়", i1p: "কক্সবাজার সমুদ্রসৈকত আর সেন্ট মার্টিন দ্বীপ।",
       i2t: "কখন", i2p: "১২ ডিসেম্বর (রাত) থেকে ১৮ ডিসেম্বর (সকাল)। সম্ভাব্য শিডিউল নিচে দেখুন।",
-      i3t: "যাচাই", i3p: "প্রি-রেজিস্ট্রেশন শুধু আগ্রহ জানানোর জন্য। অভিভাবকের সাথে ফোনে যাচাই করা হবে।",
+      i3t: "যাচাই", i3p: "প্রি-রেজিস্ট্রেশন শুধু আগ্রহ জানানোর জন্য।",
       formTitle: "প্রি-রেজিস্ট্রেশন",
-      formNote: "এটি শুধু প্রি-রেজিস্ট্রেশন। প্রথম ধাপের কনফার্মেশন ফি জমা দেওয়ার পরই আপনার সিট নিশ্চিত হবে। যাচাইয়ের জন্য আমরা আপনার অভিভাবককে কল করতে পারি।",
+      formNote: "এটি শুধু প্রি-রেজিস্ট্রেশন। প্রথম ধাপের কনফার্মেশন ফি জমা দেওয়ার পরই আপনার সিট নিশ্চিত হবে। যাচাইয়ের জন্য ডিপার্টমেন্ট আপনার অভিভাবককে কল করতে পারে।",
       st1: "আপনি", st2: "যোগাযোগ", st3: "অভিভাবক",
       fName: "পূর্ণ নাম (আইডি কার্ড অনুযায়ী)", fTshirt: "টি-শার্টের সাইজ", fId: "স্টুডেন্ট আইডি", fSection: "সেকশন",
       fMobile: "আপনার মোবাইল নম্বর", fWa: "এই নম্বরে হোয়াটসঅ্যাপ আছে", fGender: "জেন্ডার", gM: "ছেলে", gF: "মেয়ে",
-      fGName: "অভিভাবকের নাম", fGRel: "সম্পর্ক", select: "নির্বাচন করুন", rF: "বাবা", rM: "মা", rB: "ভাই", rS: "বোন",
-      fGMobile: "অভিভাবকের মোবাইল (যাচাইয়ের জন্য কল করা হবে)",
+      fGName: "অভিভাবকের নাম", fGRel: "সম্পর্ক", select: "নির্বাচন করুন", rF: "বাবা", rM: "মা", rS: "ভাই/বোন", rO: "অন্য কেউ",
+      fGMobile: "অভিভাবকের মোবাইল (যাচাইয়ের জন্য ডিপার্টমেন্ট কল করতে পারে)",
       fConsent: "আমি আমার অভিভাবককে এই ট্যুর সম্পর্কে জানিয়েছি এবং যাচাইয়ের জন্য তার নম্বর ব্যবহারে সম্মত।",
       back: "পিছনে", next: "পরের ধাপ", submit: "সাবমিট করুন",
       okTitle: "রেজিস্ট্রেশন পাওয়া গেছে!", okText: "আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে। সব আপডেট ব্যাচের গ্রুপে জানানো হবে।",
@@ -56,7 +53,7 @@
       sc4d: "১৬ ডিসেম্বর (বিকেল)", sc4t: "ফিরতি শিপে সেন্ট মার্টিন থেকে কক্সবাজারে আগমন এবং কক্সবাজারে রাত্রিযাপন।",
       sc5d: "১৭ ডিসেম্বর (বিকেল/সন্ধ্যা)", sc5t: "কক্সবাজার থেকে সিলেটের উদ্দেশ্যে ফিরতি যাত্রা।",
       sc6d: "১৮ ডিসেম্বর (সকাল)", sc6t: "সিলেটে পৌঁছানো।",
-      scNote: "আমরা আমাদের ট্যুরের জন্য স্পনসর খুঁজছি। ভালো স্পনসর ব্যবস্থা হলে ট্যুরের মোট ফি আরও কমতে পারে। সম্পূর্ণ বিষয়টি আমাদের স্পনসর এবং ইউনিভার্সিটি ফান্ডিং-এর ওপর নির্ভর করছে। চূড়ান্ত ফি পরে জানানো হবে।",
+      scNote: "আমরা আমাদের ট্যুরের জন্য স্পনসর খুঁজছি। ভালো স্পনসর ব্যবস্থা হলে ট্যুরের মোট ফি আরও কমতে পারে। সম্পূর্ণ বিষয়টি আমাদের স্পনসর ফান্ডিং-এর ওপর নির্ভর করছে।",
       feeTitle: "Fees & Payment Deadlines",
       feeTotal: "Total fee per person (approx.)",
       feeAmt: "BDT 10,000*",
@@ -72,7 +69,7 @@
       p3d: "By 5 December",
       p3x: "Pay the remaining amount.",
       femTitle: "For Female Students",
-      femText: "Female students may bring one verified guardian. An extra fee will be applicable (Amount will be announced later).",
+      femText: "Female students can bring one verified guardian. An extra fee will be applicable (Amount will be announced later).",
       fBring: "Will a guardian travel with you?",
       yes: "হ্যাঁ", no: "না",
       cdOpenTitle: "রেজিস্ট্রেশন শুরু হতে বাকি", op: "শুরু: ",
@@ -84,13 +81,13 @@
       cdTitle: "Pre-registration closes in", d: "Days", h: "Hours", m: "Min", s: "Sec",
       i1t: "Where", i1p: "Cox's Bazar sea beach and Saint Martin island.",
       i2t: "When", i2p: "Night of 12 December to morning of 18 December. See the tentative schedule below.",
-      i3t: "Verification", i3p: "Pre-registration only shows interest. We will verify by calling your guardian.",
+      i3t: "Verification", i3p: "Pre-registration only shows interest.",
       formTitle: "Pre-registration",
-      formNote: "This is only a pre-registration. Your seat is confirmed only after the 1st installment (confirmation fee) is paid. We may call your guardian to verify.",
+      formNote: "This is only a pre-registration. Your seat is confirmed only after the 1st installment (confirmation fee) is paid. Department may call your guardian to verify.",
       st1: "You", st2: "Contact", st3: "Guardian",
       fName: "Full name (as on ID card)", fTshirt: "T-shirt size", fId: "Student ID", fSection: "Section",
       fMobile: "Your mobile number", fWa: "This number is on WhatsApp", fGender: "Gender", gM: "Male", gF: "Female",
-      fGName: "Guardian's name", fGRel: "Relation", select: "Select", rF: "Father", rM: "Mother", rB: "Brother", rS: "Sister",
+      fGName: "Guardian's name", fGRel: "Relation", select: "Select", rF: "Father", rM: "Mother", rS: "Sibling", rO: "Other",
       fGMobile: "Guardian's mobile (we will call to verify)",
       fConsent: "I have informed my guardian about this tour and agree to the use of their number for verification.",
       back: "Back", next: "Next", submit: "Submit",
@@ -111,7 +108,7 @@
       sc4d: "16 December (afternoon)", sc4t: "Return ship from Saint Martin to Cox's Bazar, then overnight stay in Cox's Bazar.",
       sc5d: "17 December (afternoon/evening)", sc5t: "Depart from Cox's Bazar for Sylhet.",
       sc6d: "18 December (morning)", sc6t: "Arrive in Sylhet.",
-      scNote: "We are currently looking for sponsors for our tour. If we can manage good sponsors, the total fee may decrease further. The final amount depends entirely on our sponsors and university funding. The final amount will be announced later.",
+      scNote: "We are currently looking for sponsors for our tour. If we can manage good sponsors, the total fee may decrease further. The final amount depends entirely on our sponsors funding.",
       feeTitle: "Fees & Payment Deadlines",
       feeTotal: "Total fee per person (approx.)",
       feeAmt: "BDT 10,000*",
@@ -127,7 +124,7 @@
       p3d: "By 5 December",
       p3x: "Pay the remaining amount.",
       femTitle: "For Female Students",
-      femText: "Female students may bring one verified guardian. An extra fee will be applicable (Amount will be announced later).",
+      femText: "Female students can bring one verified guardian. An extra fee will be applicable (Amount will be announced later).",
       fBring: "Will a guardian travel with you?",
       yes: "Yes", no: "No",
       cdOpenTitle: "Registration opens in", op: "Opens: ",

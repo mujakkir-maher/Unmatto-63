@@ -1,11 +1,3 @@
-/**
- * Google Apps Script (bound to the Google Sheet).
- * Setup:  Sheet > Extensions > Apps Script > paste this file.
- *         Project Settings > Script properties > add  SECRET = <long random string>
- *         Deploy > New deployment > Web app > Execute as: Me, Who has access: Anyone
- *         Copy the /exec URL into Netlify as APPS_SCRIPT_URL.
- * The URL alone is not enough to write data: requests without the SECRET are rejected.
- */
 var SHEET_NAME = 'Registrations';
 var HEADERS = [
   'Timestamp', 'Name', 'Student ID', 'Section', 'T-shirt', 'Mobile', 'WhatsApp same',
@@ -17,7 +9,6 @@ function out_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
 
-// Stops spreadsheet formula injection (a cell starting with = + - @ would run as a formula)
 function safe_(v) {
   v = String(v == null ? '' : v);
   return /^[=+\-@]/.test(v) ? "'" + v : v;
@@ -31,7 +22,6 @@ function sheet_() {
     sh.appendRow(HEADERS);
     sh.setFrozenRows(1);
     sh.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold').setBackground('#fde6cf');
-    // text format so phone numbers keep their leading 0 and IDs are not rounded
     sh.getRange(2, 3, 2000, 1).setNumberFormat('@');
     sh.getRange(2, 6, 2000, 1).setNumberFormat('@');
     sh.getRange(2, 12, 2000, 1).setNumberFormat('@');
@@ -50,7 +40,7 @@ function doPost(e) {
     if (!secret || body.secret !== secret) return out_({ ok: false, error: 'unauthorized' });
     if (!body.studentId || !body.name) return out_({ ok: false, error: 'invalid' });
 
-    lock.waitLock(8000); // one writer at a time, so duplicate check is reliable (kept under the 9 s function timeout)
+    lock.waitLock(8000);
     var sh = sheet_();
     var id = String(body.studentId).trim();
 
@@ -82,7 +72,6 @@ function doPost(e) {
   }
 }
 
-// Opening the /exec URL in a browser shows nothing useful (and no data).
 function doGet() {
   return ContentService.createTextOutput('OK');
 }
